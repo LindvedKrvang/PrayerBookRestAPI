@@ -15,7 +15,7 @@ namespace PrayerBookDAL.UOW
         {
             _context = context;
 
-            PrayerRepository = new PrayerRepository();
+            PrayerRepository = new PrayerRepository(_context);
         }
 
         public void Dispose()
