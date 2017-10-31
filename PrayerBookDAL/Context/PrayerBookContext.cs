@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using PrayerBookDAL.Entities;
 
 namespace PrayerBookDAL.Context
 {
     public class PrayerBookContext : DbContext
     {
-        private static readonly DbContextOptions<PrayerBookContext> options =
-            new DbContextOptionsBuilder<PrayerBookContext>().UseInMemoryDatabase("TheDB").Options;
-
-        public PrayerBookContext() : base(options)
+      
+        public PrayerBookContext(DbContextOptions<PrayerBookContext> options) : base(options)
         {
-            
+            Database.EnsureCreated();
         }
+
+        public DbSet<Prayer> Prayers { get; set; }
     }
 }
