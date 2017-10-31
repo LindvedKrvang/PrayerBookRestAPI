@@ -8,7 +8,6 @@ namespace PrayerBookDAL.Context
 {
     public class PrayerBookContext : DbContext
     {
-      
         public PrayerBookContext(DbContextOptions<PrayerBookContext> options) : base(options)
         {
             Database.EnsureCreated();
