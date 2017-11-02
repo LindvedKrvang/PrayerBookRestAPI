@@ -6,7 +6,10 @@ install:
 - dotnet restore
 script:
 - dotnet build
+- dotnet test PrayerBookDALTest/PrayerBookDALTest.csproj
 branches:
   only:
   - master
   - development
+  notifications:
+  email: false
