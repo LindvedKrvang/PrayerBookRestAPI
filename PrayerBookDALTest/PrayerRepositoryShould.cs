@@ -79,5 +79,11 @@ namespace PrayerBookDALTest
             var deleteSuccesfull = _repository.Delete(0);
             Assert.False(deleteSuccesfull);
         }
+
+        [Fact]
+        public void CITestProject()
+        {
+            Assert.True(true);
+        }
     }
 }
