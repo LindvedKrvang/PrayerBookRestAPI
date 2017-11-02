@@ -31,7 +31,9 @@ namespace PrayerBookRestAPI.Controllers
         [HttpGet("{id}", Name = "GetPrayer")]
         public IActionResult Get(int id)
         {
-            return BadRequest();
+            var prayer = _service.Get(id);
+            if (prayer == null) return NotFound();
+            return Ok(prayer);
         }
         
         // POST: api/Prayers
@@ -43,16 +45,21 @@ namespace PrayerBookRestAPI.Controllers
         
         // PUT: api/Prayers/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody]PrayerBO value)
         {
-            return BadRequest();
+            if (id != value.Id) return NotFound("The id of the prayer must match the id of the request.");
+            var prayer = _service.Get(value.Id);
+            if (prayer == null) return NotFound();
+            return Ok(_service.Update(value));
         }
         
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            return BadRequest();
+            var prayer = _service.Get(id);
+            if (prayer == null) return NotFound();
+            return Ok(_service.Delete(id));
         }
     }
 }
