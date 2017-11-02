@@ -7,7 +7,7 @@ using PrayerBookDAL.Repositories;
 
 namespace PrayerBookDAL.UOW
 {
-    internal class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly PrayerBookContext _context;
 

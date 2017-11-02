@@ -6,6 +6,7 @@ using PrayerBookBLL.Interfaces;
 using PrayerBookBLL.Services;
 using PrayerBookDAL.Interfaces;
 
+[assembly: InternalsVisibleTo("PrayerBookRestAPI")]
 [assembly: InternalsVisibleTo("PrayerBookBLLTest")]
 namespace PrayerBookBLL.Facade
 {
