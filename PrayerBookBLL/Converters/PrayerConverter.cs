@@ -11,12 +11,22 @@ namespace PrayerBookBLL.Converters
     {
         public PrayerBO Convert(Prayer entity)
         {
-            throw new NotImplementedException();
+            if (entity == null) return null;
+            return new PrayerBO
+            {
+                Id = entity.Id,
+                Subject = entity.Subject
+            };
         }
 
         public Prayer Convert(PrayerBO bo)
         {
-            throw new NotImplementedException();
+            if (bo == null) return null;
+            return new Prayer
+            {
+                Id = bo.Id,
+                Subject = bo.Subject
+            };
         }
     }
 }

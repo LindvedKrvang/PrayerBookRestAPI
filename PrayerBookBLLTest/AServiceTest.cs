@@ -17,13 +17,14 @@ namespace PrayerBookBLLTest
         }
 
         public abstract void CreateOne();
+        public abstract void NotCreateOneParseNull();
         public abstract void GetAll();
         public abstract void GetOneByExistingId();
         public abstract void NotGetOneByNonExistingId();
-        public abstract void NotConvertNullEntity();
         public abstract void DeleteByExistingId();
         public abstract void NotDeleteOneByNonExistingId();
         public abstract void UpdateByExistingId();
         public abstract void NotUpdateByNonExistingId();
+        public abstract void NotUpdateByNull();
     }
 }
