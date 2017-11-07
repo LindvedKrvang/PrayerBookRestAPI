@@ -57,8 +57,6 @@ namespace PrayerBookRestAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var prayer = _service.Get(id);
-            if (prayer == null) return NotFound();
             return Ok(_service.Delete(id));
         }
     }

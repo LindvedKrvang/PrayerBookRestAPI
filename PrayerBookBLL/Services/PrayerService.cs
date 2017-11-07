@@ -69,8 +69,9 @@ namespace PrayerBookBLL.Services
             {
                 var prayer = uow.PrayerRepository.Get(id);
                 if (prayer == null) return false;
+                var response = uow.PrayerRepository.Delete(id);
                 uow.Complete();
-                return uow.PrayerRepository.Delete(id);
+                return response;
             }
         }
     }
