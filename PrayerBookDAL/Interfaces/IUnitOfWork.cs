@@ -7,6 +7,7 @@ namespace PrayerBookDAL.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         IPrayerRepository PrayerRepository { get; }
+        IResponseRepository ResponseRepository { get; }
 
         int Complete();
     }

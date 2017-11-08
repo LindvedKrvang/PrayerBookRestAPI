@@ -14,5 +14,6 @@ namespace PrayerBookDAL.Context
         }
 
         public DbSet<Prayer> Prayers { get; set; }
+        public  DbSet<Response> Responses { get; set; }
     }
 }
