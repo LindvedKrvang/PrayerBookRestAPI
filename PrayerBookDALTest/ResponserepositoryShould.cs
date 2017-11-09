@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using PrayerBookDAL.Context;
+using PrayerBookDAL.Entities;
 using PrayerBookDAL.Interfaces;
 using PrayerBookDAL.Repositories;
 using PrayerBookDALTest.Helpers;
+using Xunit;
 
 namespace PrayerBookDALTest
 {
@@ -19,39 +22,77 @@ namespace PrayerBookDALTest
             _repository = new ResponseRepository(_context);
         }
 
+        private Response CreateMockResponse()
+        {
+            var mock = new Response{Answer = "TestAnser", PrayerId = 1, ResponseNumber = 1};
+            var createdResponse = _repository.Create(mock);
+            _context.SaveChanges();
+            return createdResponse;
+        }
+
+        [Fact]
         public void CreateOne()
         {
-            throw new NotImplementedException();
+            var createdResponse = CreateMockResponse();
+            Assert.NotNull(createdResponse);
         }
-
+        [Fact]
         public void NotCreateOneParseNull()
         {
-            throw new NotImplementedException();
+            var createdResponse = _repository.Create(null);
+            Assert.Null(createdResponse);
         }
-
+        [Fact]
         public void GetAll()
         {
-            throw new NotImplementedException();
+            CreateMockResponse();
+            CreateMockResponse();
+            CreateMockResponse();
+
+            var result = _repository.GetAll();
+            Assert.NotNull(result);
+            var expectedResult = 3;
+            Assert.Equal(expectedResult, result.Count());
         }
+        [Fact]
 
         public void GetOneByExistingId()
         {
-            throw new NotImplementedException();
+            CreateMockResponse();
+            var createdresponse = CreateMockResponse();
+            CreateMockResponse();
+
+            var result = _repository.Get(createdresponse.Id);
+
+            Assert.NotNull(result);
+            Assert.Equal(createdresponse.Id, result.Id);
         }
+        [Fact]
 
         public void NotGetOneByNonExistingId()
         {
-            throw new NotImplementedException();
+            var id = 0;
+            var result = _repository.Get(0);
+
+            Assert.Null(result);
         }
 
+        [Fact]
         public void DeleteOneWithExistingId()
         {
-            throw new NotImplementedException();
+            var createdResponse = CreateMockResponse();
+            _repository.Delete(createdResponse.Id);
+            _context.SaveChanges();
+            var listAfterDelete = _repository.GetAll();
+
+            Assert.DoesNotContain(createdResponse, listAfterDelete);
         }
+        [Fact]
 
         public void NotDeleteOneWIthNonExistingId()
         {
-            throw new NotImplementedException();
+            var isDeleted = _repository.Delete(0);
+            Assert.False(isDeleted);
         }
     }
 }
