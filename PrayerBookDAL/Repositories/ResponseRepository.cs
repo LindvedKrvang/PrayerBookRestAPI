@@ -36,8 +36,7 @@ namespace PrayerBookDAL.Repositories
             var responseToDelete = Get(id);
             if (responseToDelete == null) return false;
             var deletedResponse = _context.Responses.Remove(responseToDelete);
-            if (deletedResponse == null) return false;
-            return true;
+            return deletedResponse != null;
         }
     }
 }
