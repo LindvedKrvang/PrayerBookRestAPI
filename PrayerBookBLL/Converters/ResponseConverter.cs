@@ -11,6 +11,7 @@ namespace PrayerBookBLL.Converters
     {
         public ResponseBO Convert(Response entity)
         {
+            if (entity == null) return null;
             return new ResponseBO
             {
                 Id = entity.Id,
@@ -22,6 +23,7 @@ namespace PrayerBookBLL.Converters
 
         public Response Convert(ResponseBO bo)
         {
+            if (bo == null) return null;
             return new Response
             {
                 Id = bo.Id,
