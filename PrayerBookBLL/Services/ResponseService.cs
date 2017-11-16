@@ -27,6 +27,7 @@ namespace PrayerBookBLL.Services
             using (var uow = _facade.UnitOfWork)
             {
                 var createdResponse = uow.ResponseRepository.Create(_responseConverter.Convert(businessObject));
+                uow.Complete();
                 return _responseConverter.Convert(createdResponse);
             }
         }
