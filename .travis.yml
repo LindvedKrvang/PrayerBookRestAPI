@@ -2,9 +2,6 @@ language: csharp
 mono: none
 dotnet: 2.0.0
 dist: trusty
-before_install:
-  - sudo rm -vf /etc/apt/sources.list.d/*riak*
-  - sudo apt-get update
 install:
 - dotnet restore
 script:
