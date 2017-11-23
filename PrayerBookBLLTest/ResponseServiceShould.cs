@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Moq;
 using PrayerBookBLL.BusinessObjects;
+using PrayerBookBLL.Converters;
 using PrayerBookBLL.Interfaces;
 using PrayerBookBLL.Services;
 using PrayerBookDAL.Entities;
@@ -126,6 +128,26 @@ namespace PrayerBookBLLTest
             var result = _service.Update(null);
 
             Assert.Null(result);
+        }
+
+        [Fact]
+        private void GetResponseForPrayerWithId()
+        {
+            //    var converter = new ResponseConverter();
+            //    var prayerId = 1;
+            //    var response1 = new Response { Id = 1, PrayerId = prayerId };
+            //    var response2 = new Response { Id = 2, PrayerId = prayerId };
+            //    var response3 = new Response { Id = 3, PrayerId = prayerId };
+
+            //    _mockResponseRepo.Setup(r => r.Get(response1.Id)).Returns(response1);
+            //    _mockResponseRepo.Setup(r => r.Get(response2.Id)).Returns(response2);
+            //    _mockResponseRepo.Setup(r => r.Get(response3.Id)).Returns(response3);
+
+            //    var result = _service.GetResponsesForPrayerWithId(prayerId);
+
+            //    Assert.Contains(converter.Convert(response1), result);
+            //    Assert.Contains(converter.Convert(response2), result);
+            //    Assert.Contains(converter.Convert(response3), result);
         }
     }
 }

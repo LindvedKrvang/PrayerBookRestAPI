@@ -14,11 +14,13 @@ namespace PrayerBookBLL.Services
     {
         private readonly IDALFacade _facade;
         private readonly IConverter<PrayerBO, Prayer> _prayerConverter;
+        private readonly IConverter<ResponseBO, Response> _reponseConverter;
 
         public PrayerService(IDALFacade facade)
         {
             _facade = facade;
             _prayerConverter = new PrayerConverter();
+            _reponseConverter = new ResponseConverter();
         }
 
         public PrayerBO Create(PrayerBO businessObject)
@@ -46,7 +48,11 @@ namespace PrayerBookBLL.Services
             {
                 var prayer = uow.PrayerRepository.Get(id);
                 if (prayer == null) return null;
-                return _prayerConverter.Convert(prayer);
+                var prayerBO = _prayerConverter.Convert(prayer);
+                var responses = uow.ResponseRepository.GetAll().Where(r => r.PrayerId == prayerBO.Id)
+                    .Select(_reponseConverter.Convert).ToList();
+                prayerBO.Responses = responses;
+                return prayerBO;
             }
         }
 

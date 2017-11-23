@@ -76,5 +76,14 @@ namespace PrayerBookBLL.Services
                 return responseDeleted;
             }
         }
+
+        public List<ResponseBO> GetResponsesForPrayerWithId(int prayerId)
+        {
+            //using (var uow = _facade.UnitOfWork)
+            //{
+            //    var responses = uow.ResponseRepository
+            //}
+            return null;
+        }
     }
 }

@@ -7,5 +7,6 @@ namespace PrayerBookBLL.Interfaces
 {
     public interface IResponseService : IService<ResponseBO>
     {
+        List<ResponseBO> GetResponsesForPrayerWithId(int prayerId);
     }
 }
