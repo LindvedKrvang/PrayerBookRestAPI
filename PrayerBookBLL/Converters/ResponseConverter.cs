@@ -17,7 +17,8 @@ namespace PrayerBookBLL.Converters
                 Id = entity.Id,
                 Answer = entity.Answer,
                 PrayerId = entity.PrayerId,
-                ResponseNumber = entity.ResponseNumber
+                ResponseNumber = entity.ResponseNumber,
+                UserId = entity.UserId
             };
         }
 
@@ -29,7 +30,8 @@ namespace PrayerBookBLL.Converters
                 Id = bo.Id,
                 Answer = bo.Answer,
                 PrayerId = bo.PrayerId,
-                ResponseNumber = bo.ResponseNumber
+                ResponseNumber = bo.ResponseNumber,
+                UserId = bo.UserId
             };
         }
     }

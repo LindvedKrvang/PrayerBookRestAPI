@@ -37,6 +37,7 @@ namespace PrayerBookRestAPI.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]ResponseBO value)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
             return Ok(_service.Create(value));
         }
         

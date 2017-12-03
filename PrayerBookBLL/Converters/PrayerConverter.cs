@@ -16,7 +16,8 @@ namespace PrayerBookBLL.Converters
             {
                 Id = entity.Id,
                 Subject = entity.Subject,
-                Responses = new List<ResponseBO>()
+                Responses = new List<ResponseBO>(),
+                UserId = entity.UserId
             };
         }
 
@@ -26,7 +27,8 @@ namespace PrayerBookBLL.Converters
             return new Prayer
             {
                 Id = bo.Id,
-                Subject = bo.Subject
+                Subject = bo.Subject,
+                UserId = bo.UserId
             };
         }
     }

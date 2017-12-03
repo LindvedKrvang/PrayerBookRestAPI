@@ -9,6 +9,6 @@ namespace PrayerBookDAL.Entities
         public int Id { get; set; }
         public string Subject { get; set; }
         public int ResponseNumber { get; set; }
-
+        public string UserId { get; set; }
     }
 }

@@ -10,5 +10,6 @@ namespace PrayerBookDAL.Entities
         public string Answer { get; set; }
         public int PrayerId { get; set; }
         public int ResponseNumber { get; set; }
+        public string UserId { get; set; }
     }
 }
