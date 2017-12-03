@@ -10,6 +10,7 @@ namespace PrayerBookDAL.Context
     {
         public PrayerBookContext(DbContextOptions<PrayerBookContext> options) : base(options)
         {
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
