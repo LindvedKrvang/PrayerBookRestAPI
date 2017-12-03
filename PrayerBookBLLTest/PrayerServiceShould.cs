@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Moq;
 using PrayerBookBLL.BusinessObjects;
+using PrayerBookBLL.Converters;
 using PrayerBookBLL.Interfaces;
 using PrayerBookBLL.Services;
 using PrayerBookDAL.Entities;
@@ -13,12 +15,15 @@ namespace PrayerBookBLLTest
     public class PrayerServiceShould : AServiceTest
     {
         private readonly Mock<IPrayerRepository> _mockPrayerRepo;
+        private readonly Mock<IResponseRepository> _mockResponseRepo;
         private readonly IPrayerService _service;
 
         public PrayerServiceShould()
         {
             _mockPrayerRepo = new Mock<IPrayerRepository>();
+            _mockResponseRepo = new Mock<IResponseRepository>();
             MockUOW.Setup(uow => uow.PrayerRepository).Returns(_mockPrayerRepo.Object);
+            MockUOW.Setup(uow => uow.ResponseRepository).Returns(_mockResponseRepo.Object);
             _service = new PrayerService(MockDALFacade.Object);
         }
 
@@ -112,6 +117,30 @@ namespace PrayerBookBLLTest
         {
             var result = _service.Update(null);
             Assert.Null(result);
+        }
+
+        [Fact]
+        private void GetPrayerWithResponse()
+        {
+            //TODO RKL: Make this unitTest work!
+            //var converter = new ResponseConverter();
+            //var prayerId = 1;
+            //var prayer = new Prayer{Id = prayerId};
+            //var response1 = new Response { Id = 1, PrayerId = prayerId };
+            //var response2 = new Response { Id = 2, PrayerId = prayerId };
+            //var response3 = new Response { Id = 3, PrayerId = prayerId };
+
+            //_mockPrayerRepo.Setup(r => r.Get(prayer.Id)).Returns(prayer);
+            //_mockResponseRepo.Setup(r => r.GetAll()).Returns(() => new List<Response>{response1, response2, response3});
+            ////_mockResponseRepo.Setup(r => r.Get(response1.Id)).Returns(response1);
+            ////_mockResponseRepo.Setup(r => r.Get(response2.Id)).Returns(response2);
+            ////_mockResponseRepo.Setup(r => r.Get(response3.Id)).Returns(response3);
+
+            //var result = _service.Get(prayer.Id);
+
+            //Assert.Contains(converter.Convert(response1), result.Responses);
+            //Assert.Contains(converter.Convert(response2), result.Responses);
+            //Assert.Contains(converter.Convert(response3), result.Responses);
         }
     }
 }

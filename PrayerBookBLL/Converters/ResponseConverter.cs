@@ -7,27 +7,30 @@ using PrayerBookDAL.Entities;
 
 namespace PrayerBookBLL.Converters
 {
-    internal class PrayerConverter : IConverter<PrayerBO, Prayer>
+    internal class ResponseConverter : IConverter<ResponseBO, Response>
     {
-        public PrayerBO Convert(Prayer entity)
+        public ResponseBO Convert(Response entity)
         {
             if (entity == null) return null;
-            return new PrayerBO
+            return new ResponseBO
             {
                 Id = entity.Id,
-                Subject = entity.Subject,
-                Responses = new List<ResponseBO>(),
+                Answer = entity.Answer,
+                PrayerId = entity.PrayerId,
+                ResponseNumber = entity.ResponseNumber,
                 UserId = entity.UserId
             };
         }
 
-        public Prayer Convert(PrayerBO bo)
+        public Response Convert(ResponseBO bo)
         {
             if (bo == null) return null;
-            return new Prayer
+            return new Response
             {
                 Id = bo.Id,
-                Subject = bo.Subject,
+                Answer = bo.Answer,
+                PrayerId = bo.PrayerId,
+                ResponseNumber = bo.ResponseNumber,
                 UserId = bo.UserId
             };
         }

@@ -13,6 +13,7 @@ namespace PrayerBookBLL.Facade
     public class BLLFacade : IBLLFacade
     {
         public IPrayerService PrayerService => new PrayerService(_facade);
+        public IResponseService ResponseService => new ResponseService(_facade);
 
         private readonly IDALFacade _facade;
 

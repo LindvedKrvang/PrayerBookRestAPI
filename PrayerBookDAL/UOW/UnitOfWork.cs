@@ -16,6 +16,7 @@ namespace PrayerBookDAL.UOW
             _context = context;
 
             PrayerRepository = new PrayerRepository(_context);
+            ResponseRepository = new ResponseRepository(_context);
         }
 
         public void Dispose()
@@ -24,6 +25,7 @@ namespace PrayerBookDAL.UOW
         }
 
         public IPrayerRepository PrayerRepository { get; }
+        public IResponseRepository ResponseRepository { get; }
 
         public int Complete()
         {

@@ -10,47 +10,42 @@ using PrayerBookBLL.Interfaces;
 namespace PrayerBookRestAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Prayers")]
-    public class PrayersController : Controller
+    [Route("api/Responses")]
+    public class ResponsesController : Controller
     {
-        private readonly IPrayerService _service;
+        private IResponseService _service;
 
-        public PrayersController(IPrayerService service)
+        public ResponsesController(IResponseService responseService)
         {
-            _service = service;
+            _service = responseService;
         }
-
-        // GET: api/Prayers
+        // GET: api/Responses
         [HttpGet]
-        public IEnumerable<PrayerBO> Get()
+        public IEnumerable<ResponseBO> Get()
         {
             return _service.GetAll();
         }
 
-        // GET: api/Prayers/5
-        [HttpGet("{id}", Name = "GetPrayer")]
+        // GET: api/Responses/5
+        [HttpGet("{id}", Name = "GetResponse")]
         public IActionResult Get(int id)
         {
-            var prayer = _service.Get(id);
-            if (prayer == null) return NotFound();
-            return Ok(prayer);
+            return Ok(_service.Get(id));
         }
         
-        // POST: api/Prayers
+        // POST: api/Responses
         [HttpPost]
-        public IActionResult Post([FromBody]PrayerBO value)
+        public IActionResult Post([FromBody]ResponseBO value)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             return Ok(_service.Create(value));
         }
         
-        // PUT: api/Prayers/5
+        // PUT: api/Responses/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]PrayerBO value)
+        public IActionResult Put(int id, [FromBody]ResponseBO value)
         {
-            if (id != value.Id) return NotFound("The id of the prayer must match the id of the request.");
-            var prayer = _service.Get(value.Id);
-            if (prayer == null) return NotFound();
+            if (id != value.Id) return BadRequest("The id of the response must match the given id...");
             return Ok(_service.Update(value));
         }
         

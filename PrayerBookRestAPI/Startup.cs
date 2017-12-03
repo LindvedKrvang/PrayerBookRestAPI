@@ -19,12 +19,18 @@ namespace PrayerBookRestAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
+        public IHostingEnvironment Environment { get; }
         public IConfiguration Configuration { get; }
+
+        public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", false, true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
+            Environment = env;
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -32,14 +38,18 @@ namespace PrayerBookRestAPI
             services.AddMvc();
 
             services.AddSingleton(Configuration);
-
-            services.AddDbContext<PrayerBookContext>(opt => opt.UseInMemoryDatabase("PrayerBook"));
+            if(Environment.IsDevelopment())
+                services.AddDbContext<PrayerBookContext>(opt => opt.UseInMemoryDatabase("PrayerBook"));
+            else
+            services.AddDbContext<PrayerBookContext>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IBLLFacade, BLLFacade>();
             services.AddScoped<IDALFacade, DALFacade>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IPrayerService, PrayerService>();
+            services.AddScoped<IResponseService, ResponseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,23 +58,25 @@ namespace PrayerBookRestAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
+                //app.UseBrowserLink();
 
                 
             }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-            }
+            //else
+            //{
+            //    app.UseExceptionHandler("/Error");
+            //}
 
-            app.UseStaticFiles();
+            app.UseMvc();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-            });
+            //app.UseStaticFiles();
+
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "default",
+            //        template: "{controller}/{action=Index}/{id?}");
+            //});
         }
     }
 }
